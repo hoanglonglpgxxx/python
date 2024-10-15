@@ -21,44 +21,50 @@ for filename in filenames:
     print(filename) """
 
 while True:
-    user_action = input("Enter add, edit or show :")
+    user_action = input("Enter add, edit, complete or show :")
     user_action = user_action.strip().lower()
-    match user_action:
-        case 'add':
-            todo = input("Enter a todo: ") + '\n'
 
-            file = open('./basics/todos.txt', 'r')
+    if 'add' in user_action:
+        todo = user_action[4:] #cắt chuỗi từ vị trí thứ 4 đến hết
+
+        with open('./basics/todos.txt', 'r') as file:
             todos = file.readlines()
-            file.close() #đóng file để tránh lỗi
 
-            todos.append(todo.capitalize())
-            
-            file = open('./basics/todos.txt', 'w') #a là append, w là write, r là read
+        todos.append(todo.capitalize() + '\n')
+
+        with open('./basics/todos.txt', 'w') as file:
             file.writelines(todos)
-            file.close()
-        case 'show' | 'list':
-            file = open('./basics/todos.txt', 'r')
+    elif 'show' in user_action:
+        with open('./basics/todos.txt', 'r') as file:
             todos = file.readlines()
-            file.close() #có thể đóng file luôn vì giá trị được lưu trong biến todos rồi
 
-            for index, item in enumerate(todos):
-                print(f'{index + 1}. {item.strip()}') #strip để xóa ký tự xuống dòng
-        case 'edit': 
-            number = int(input('Enter position of action u want to change: '))
-            number = number - 1
-            if 0 <= number < len(todos):
-                print(f'Item u want to change at position {number} is: {todos[number]}')
-                new_todo = input('Enter new todo: ')
-                todos[number] = new_todo.capitalize()
-                print('Updated list: ', todos)
-            else:
-                print('number must greater than 0 and less than ', len(todos))
-        case 'complete':
-            number = int(input('Number of the todo to complete:'))
-            todos.pop(number - 1)
-        case 'end':
-            break
-        case default:
-            print('Invalid action')
-            continue
+        for index, item in enumerate(todos):
+            print(f'{index + 1}. {item.strip()}') #strip để xóa ký tự xuống dòng
+    elif 'edit' in user_action: 
+        number = int(user_action[5:])
+        number = number - 1
+        with open('./basics/todos.txt', 'r') as file:
+            todos = file.readlines()
+
+        if 0 <= number < len(todos):
+            print(f'Item u want to change at position {number} is: {todos[number]}')
+            new_todo = input('Enter new todo: ')
+            todos[number] = new_todo.capitalize() + '\n'
+            with open('./basics/todos.txt', 'w') as file:
+                file.writelines(todos)
+        else:
+            print('number must greater than 0 and less than ', len(todos))
+    elif 'complete' in user_action:
+        number = int(user_action[9:])
+        with open('./basics/todos.txt', 'r') as file:
+            todos = file.readlines()
+
+        todos.pop(number - 1)
+        with open('./basics/todos.txt', 'w') as file:
+            file.writelines(todos)
+    elif 'end' in user_action:
+        break
+    else :
+        print('Invalid action')
+        continue
 print('Goodbye')
