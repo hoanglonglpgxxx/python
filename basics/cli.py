@@ -20,49 +20,60 @@ for filename in filenames:
     filename = filename.replace('.', '-', 1);# 1 là số lần thay thế
     print(filename) """
 
+def get_todos(): #đọc file và trả về list
+    with open('./basics/todos.txt', 'r') as file_local:
+        todos_local = file_local.readlines()
+    return todos_local
+
 while True:
     user_action = input("Enter add, edit, complete or show :")
     user_action = user_action.strip().lower()
 
-    if 'add' in user_action:
+    if user_action.startswith('add'):
         todo = user_action[4:] #cắt chuỗi từ vị trí thứ 4 đến hết
 
-        with open('./basics/todos.txt', 'r') as file:
-            todos = file.readlines()
+        todos = get_todos()
 
         todos.append(todo.capitalize() + '\n')
 
         with open('./basics/todos.txt', 'w') as file:
             file.writelines(todos)
-    elif 'show' in user_action:
-        with open('./basics/todos.txt', 'r') as file:
-            todos = file.readlines()
+    elif user_action.startswith('show'):
+        todos = get_todos()
 
         for index, item in enumerate(todos):
             print(f'{index + 1}. {item.strip()}') #strip để xóa ký tự xuống dòng
-    elif 'edit' in user_action: 
-        number = int(user_action[5:])
-        number = number - 1
-        with open('./basics/todos.txt', 'r') as file:
-            todos = file.readlines()
+    elif user_action.startswith('edit'):
+        try:
+            number = int(user_action[5:])
+            number = number - 1
+            todos = get_todos()
 
-        if 0 <= number < len(todos):
-            print(f'Item u want to change at position {number} is: {todos[number]}')
-            new_todo = input('Enter new todo: ')
-            todos[number] = new_todo.capitalize() + '\n'
+            if 0 <= number < len(todos):
+                print(f'Item u want to change at position {number} is: {todos[number]}')
+                new_todo = input('Enter new todo: ')
+                todos[number] = new_todo.capitalize() + '\n'
+                with open('./basics/todos.txt', 'w') as file:
+                    file.writelines(todos)
+            else:
+                print('number must greater than 0 and less than ', len(todos))
+        except ValueError:
+            print('Invalid number')
+            continue
+
+    elif user_action.startswith('complete'):
+        try:
+            number = int(user_action[9:])
+            todos = get_todos()
+
+            todos.pop(number - 1)
             with open('./basics/todos.txt', 'w') as file:
                 file.writelines(todos)
-        else:
-            print('number must greater than 0 and less than ', len(todos))
-    elif 'complete' in user_action:
-        number = int(user_action[9:])
-        with open('./basics/todos.txt', 'r') as file:
-            todos = file.readlines()
+        except IndexError:
+            print('There is no item at position ', number)
+            continue
 
-        todos.pop(number - 1)
-        with open('./basics/todos.txt', 'w') as file:
-            file.writelines(todos)
-    elif 'end' in user_action:
+    elif user_action.startswith('end'):
         break
     else :
         print('Invalid action')

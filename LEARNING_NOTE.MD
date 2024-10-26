@@ -1,4 +1,4 @@
-b1 day 10
+b1 day 12
 tuple in python !
 
 - Dictionary trong python là object trong JS
