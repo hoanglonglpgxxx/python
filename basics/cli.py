@@ -4,6 +4,9 @@ get_todos = functions.get_todos
 write_todos = functions.write_todos
 import time
 
+now = time.strftime('%b %d, %y %H:%M:%S')
+print(f'Current time: {now}')
+
 while True:
     user_action = input("Enter add, edit, complete or show :")
     user_action = user_action.strip().lower()
@@ -14,7 +17,6 @@ while True:
         todos = get_todos()
 
         todos.append(todo.capitalize() + '\n')
-
         write_todos(todos)
     elif user_action.startswith('show'):
         todos = get_todos()
