@@ -27,22 +27,22 @@ filenames = ['data1.csv', 'data2.csv', 'data3.csv'] """
 
 
 #C3. check password
-password = input('Enter password: ')
+# password = input('Enter password: ')
 
-result = {}
+# result = {}
 
-if len(password) >= 8:
-    result['length'] = (True)
-else :
-    result['length'] = (False)
+# if len(password) >= 8:
+#     result['length'] = (True)
+# else :
+#     result['length'] = (False)
 
-digit = False
-uppercase = False
-for i in password:
-    if i.isdigit():
-        digit = True
-    if i.isupper():
-        uppercase = True
-result['digit'] = digit
-result['uppercase'] = uppercase
-print('Password is valid' if all(result) else 'Password is invalid')
+# digit = False
+# uppercase = False
+# for i in password:
+#     if i.isdigit():
+#         digit = True
+#     if i.isupper():
+#         uppercase = True
+# result['digit'] = digit
+# result['uppercase'] = uppercase
+# print('Password is valid' if all(result) else 'Password is invalid')

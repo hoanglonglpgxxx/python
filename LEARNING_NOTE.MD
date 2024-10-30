@@ -1,4 +1,5 @@
-b1 day 13
+b1 day 15
 tuple in python !
+? anatomy in python
 
 - Dictionary trong python là object trong JS
