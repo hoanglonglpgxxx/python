@@ -12,7 +12,7 @@ while True:
     user_action = user_action.strip().lower()
 
     if user_action.startswith('add'):
-        todo = user_action[4:] #cắt chuỗi từ vị trí thứ 4 đến hết
+        todo = user_action[4:]
 
         todos = get_todos()
 
