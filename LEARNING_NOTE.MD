@@ -3,4 +3,4 @@ tuple in python !
 ? anatomy in python
 
 - Dictionary trong python là object trong JS
-  g
+ - command to build: cd to current folder first, then pyinstaller --onefile file_name.py

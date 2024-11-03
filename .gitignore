@@ -1,2 +1,5 @@
 .venv
 *.xml
+/build
+basics/dist
+basics/build
