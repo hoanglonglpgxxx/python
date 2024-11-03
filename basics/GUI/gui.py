@@ -1,5 +1,5 @@
 #Graphic User Interface for To-do App
-import functions
+import basics.functions as functions
 import time
 import FreeSimpleGUI as pSG
 

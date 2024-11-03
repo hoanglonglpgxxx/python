@@ -1,5 +1,5 @@
 # Import way 1: from functions import get_todos, write_todos
-import functions
+import basics.functions as functions
 get_todos = functions.get_todos
 write_todos = functions.write_todos
 import time
