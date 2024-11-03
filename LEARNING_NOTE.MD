@@ -3,3 +3,4 @@ tuple in python !
 ? anatomy in python
 
 - Dictionary trong python là object trong JS
+  g
