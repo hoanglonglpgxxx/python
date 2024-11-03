@@ -16,9 +16,18 @@ todosItems = pSG.Listbox(values=functions.get_todos(),
 
 addBtn = pSG.Button('Add')
 editBtn = pSG.Button('Edit')
+completeBtn = pSG.Button('Complete')
+exitBtn = pSG.Button('Exit')
+
+layout = [
+    [label], [input_box, addBtn],
+    [listLabel],
+    [todosItems, editBtn, completeBtn],
+    [exitBtn]
+]
 
 window = pSG.Window('Simple To-Do App',
-                    layout=[[label], [input_box, addBtn], [listLabel], [todosItems, editBtn]],
+                    layout= layout,
                     font = ('Helvetica', 16))
 while True:
     event,values = window.read() #cách dặt biến destructuring giống trong JS
@@ -42,7 +51,17 @@ while True:
         case 'todos':
             curTodoName = values['todos'][0]
             window['todo'].update(value=curTodoName)
+        case 'Complete':
+            completeItem = values['todos'][0]
+            todos = functions.get_todos()
+            todos.remove(completeItem)
+            functions.write_todos(todos)
+
+            window['todos'].update(values=todos)
+            window['todo'].update(value='')
+        case 'Exit':
+            break
         case pSG.WIN_CLOSED:
             break
-
+print('Bye')
 window.close()
