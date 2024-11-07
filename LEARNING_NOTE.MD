@@ -1,4 +1,4 @@
-vid 3 day 19
+vid 1 day 20
 tuple in python !
 ? anatomy in python
 
